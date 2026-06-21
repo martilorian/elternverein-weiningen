@@ -17,19 +17,19 @@ const ROLES = [
 const defaultData = {
   userName: "",
   events: [
-    { id: 1, title: "Herbstfest", date: "2026-09-19", time: "14:00", location: "Dorfplatz Weiningen", description: "Unser jährliches Herbstfest mit Spielen und Grillieren.", category: "Fest", tasks: [{ id: 1, label: "Grillmeister", slots: 2, helpers: [] }, { id: 2, label: "Getränke", slots: 3, helpers: [] }, { id: 3, label: "Kinderprogramm", slots: 4, helpers: [] }], attendees: [] },
-    { id: 2, title: "Laternenumzug", date: "2026-11-11", time: "17:30", location: "Schulhaus Weiningen", description: "Traditioneller Laternenumzug durch das Dorf.", category: "Tradition", tasks: [{ id: 1, label: "Laternen basteln", slots: 4, helpers: [] }, { id: 2, label: "Wegbegleitung", slots: 6, helpers: [] }], attendees: [] },
-    { id: 3, title: "Weihnachtsmarkt", date: "2026-12-05", time: "15:00", location: "Schulhausplatz Weiningen", description: "Glühwein, Punsch und Basteln für Kinder.", category: "Markt", tasks: [{ id: 1, label: "Stand aufbauen", slots: 3, helpers: [] }, { id: 2, label: "Glühwein servieren", slots: 3, helpers: [] }], attendees: [] },
+    { id: 1, title: "Herbstfest", date: "2026-09-19", time: "14:00", location: "Dorfplatz Weiningen", description: "Unser jährliches Herbstfest mit Spielen und Grillieren.", category: "Fest", tasks: [{ id: 1, label: "Grillmeister", slots: 2, helpers: [] }, { id: 2, label: "Getränke", slots: 3, helpers: [] }, { id: 3, label: "Kinderprogramm", slots: 4, helpers: [] }], attendees: [], color: "#FFD4A3" },
+    { id: 2, title: "Laternenumzug", date: "2026-11-11", time: "17:30", location: "Schulhaus Weiningen", description: "Traditioneller Laternenumzug durch das Dorf.", category: "Tradition", tasks: [{ id: 1, label: "Laternen basteln", slots: 4, helpers: [] }, { id: 2, label: "Wegbegleitung", slots: 6, helpers: [] }], attendees: [], color: "#FFB3D9" },
+    { id: 3, title: "Weihnachtsmarkt", date: "2026-12-05", time: "15:00", location: "Schulhausplatz Weiningen", description: "Glühwein, Punsch und Basteln für Kinder.", category: "Markt", tasks: [{ id: 1, label: "Stand aufbauen", slots: 3, helpers: [] }, { id: 2, label: "Glühwein servieren", slots: 3, helpers: [] }], attendees: [], color: "#A8E6D1" },
   ],
   ideas: [
     { id: 1, title: "Velotour durchs Limmattal", text: "Geführte Familienvelotour im Sommer.", author: "Lisa M.", date: "2026-03-15", votes: 8, voters: [] },
     { id: 2, title: "Spielzeug-Flohmarkt", text: "Kinder verkaufen selber — Erlös behalten sie.", author: "Thomas K.", date: "2026-03-28", votes: 12, voters: [] },
   ],
   spielgruppen: [
-    { id: 1, name: "Krabbelgruppe", age: "0–2 Jahre", day: "Dienstag", time: "09:30", slots: 10, enrolled: [], description: "Bewegung für die Kleinsten, begleitet von Eltern." },
-    { id: 2, name: "Zwergliturnen", age: "2–4 Jahre", day: "Donnerstag", time: "09:00", slots: 12, enrolled: [], description: "Turnen und Spielen in der Turnhalle Weiningen." },
-    { id: 3, name: "Spielgruppe Sonnenschein", age: "3–5 Jahre", day: "Mo/Mi", time: "08:30", slots: 14, enrolled: [], description: "Spielen, Basteln, Singen — Vorbereitung auf den Kindergarten." },
-    { id: 4, name: "Waldspielgruppe", age: "3–5 Jahre", day: "Freitag", time: "09:00", slots: 8, enrolled: [], description: "Draussen in der Natur, bei jedem Wetter." },
+    { id: 1, name: "Krabbelgruppe", age: "0–2 Jahre", day: "Dienstag", time: "09:30", slots: 10, enrolled: [], description: "Bewegung für die Kleinsten, begleitet von Eltern.", img: "/images/sg-krabbelgruppe.jpg", color: "#A8D8FF" },
+    { id: 2, name: "Zwergliturnen", age: "2–4 Jahre", day: "Donnerstag", time: "09:00", slots: 12, enrolled: [], description: "Turnen und Spielen in der Turnhalle Weiningen.", img: "/images/sg-zwergliturnen.jpg", color: "#A8E6D1" },
+    { id: 3, name: "Spielgruppe Sonnenschein", age: "3–5 Jahre", day: "Mo/Mi", time: "08:30", slots: 14, enrolled: [], description: "Spielen, Basteln, Singen — Vorbereitung auf den Kindergarten.", img: "/images/sg-spielgruppen.jpg", color: "#FFD4A3" },
+    { id: 4, name: "Waldspielgruppe", age: "3–5 Jahre", day: "Freitag", time: "09:00", slots: 8, enrolled: [], description: "Draussen in der Natur, bei jedem Wetter.", img: "/images/sg-waldspielgruppe.jpg", color: "#D4A5E6" },
   ],
   babysitter: [
     { id: 1, type: "biete", name: "Anna W.", age: 17, text: "Verfügbar abends und am Wochenende. Erfahrung mit Kleinkindern.", contact: "anna@example.ch", date: "2026-04-01" },
@@ -206,7 +206,7 @@ export default function App() {
     setMemberSent(true);
   };
 
-  if (!data) return <div style={{ display:"flex", height:"100vh", alignItems:"center", justifyContent:"center", fontFamily:"Georgia,serif" }}>Lädt…</div>;
+  if (!data) return <div style={{ display:"flex", height:"100vh", alignItems:"center", justifyContent:"center", fontFamily:"'Inter',sans-serif" }}>Lädt…</div>;
 
   const sortedEvents = [...data.events].sort((a,b) => a.date.localeCompare(b.date));
   const cats = ["Alle", ...new Set(data.events.map(e => e.category))];
@@ -219,20 +219,20 @@ export default function App() {
   const totalSlots = ROLES.reduce((n, r) => n + r.slots, 0);
 
   const S = {
-    wrap: { minHeight:"100vh", background:"#f5f2ec", fontFamily:"'Georgia','Times New Roman',serif", color:"#1e1a14" },
+    wrap: { minHeight:"100vh", background:"#f5f2ec", fontFamily:"'Inter',-apple-system,sans-serif", color:"#1e1a14" },
     header: { background:"#1e3a10", padding:"14px 18px 0", position:"sticky", top:0, zIndex:100, boxShadow:"0 2px 16px rgba(0,0,0,.22)" },
     logo: { fontSize:"9px", letterSpacing:"3px", textTransform:"uppercase", color:"#7ec85a" },
-    h1: { fontSize:"19px", fontWeight:"normal", color:"#f0ead8", margin:"2px 0 12px", letterSpacing:"0.3px" },
+    h1: { fontFamily:"'Playfair Display',Georgia,serif", fontSize:"21px", fontWeight:"600", color:"#f0ead8", margin:"2px 0 12px", letterSpacing:"0.2px" },
     nav: { display:"flex", gap:"1px", overflowX:"auto", scrollbarWidth:"none", paddingBottom:0 },
-    navBtn: (a) => ({ padding:"8px 13px", whiteSpace:"nowrap", background: a?"#f5f2ec":"transparent", border:"none", color: a?"#1e3a10":"#7ec85a", cursor:"pointer", fontSize:"12px", fontFamily:"Georgia,serif", borderRadius:"6px 6px 0 0", fontWeight: a?"bold":"normal", transition:"all .12s" }),
+    navBtn: (a) => ({ padding:"8px 13px", whiteSpace:"nowrap", background: a?"#f5f2ec":"transparent", border:"none", color: a?"#1e3a10":"#7ec85a", cursor:"pointer", fontSize:"12px", fontFamily:"'Inter',sans-serif", borderRadius:"6px 6px 0 0", fontWeight: a?"bold":"normal", transition:"all .12s" }),
     loginBar: { background:"#2d5a1e", padding:"8px 18px", display:"flex", alignItems:"center", gap:"10px", flexWrap:"wrap" },
     content: { maxWidth:"700px", margin:"0 auto", padding:"18px 14px 60px" },
     card: { background:"#fff", borderRadius:"12px", padding:"16px", marginBottom:"12px", boxShadow:"0 1px 5px rgba(0,0,0,.07)", border:"1px solid #e6e0d4" },
-    btn: (v="primary") => ({ padding:"7px 16px", borderRadius:"7px", cursor:"pointer", fontSize:"12px", fontFamily:"Georgia,serif", fontWeight:"bold", background: v==="primary"?"#1e3a10":v==="secondary"?"#4a7a30":v==="danger"?"#a0002a":v==="outline"?"transparent":"#ede8df", color: ["primary","secondary","danger"].includes(v)?"#f0ead8":v==="outline"?"#1e3a10":"#1e1a14", border: v==="outline"?"1.5px solid #1e3a10":"none", transition:"all .13s" }),
+    btn: (v="primary") => ({ padding:"7px 16px", borderRadius:"7px", cursor:"pointer", fontSize:"12px", fontFamily:"'Inter',sans-serif", fontWeight:"bold", background: v==="primary"?"#1e3a10":v==="secondary"?"#4a7a30":v==="danger"?"#a0002a":v==="outline"?"transparent":"#ede8df", color: ["primary","secondary","danger"].includes(v)?"#f0ead8":v==="outline"?"#1e3a10":"#1e1a14", border: v==="outline"?"1.5px solid #1e3a10":"none", transition:"all .13s" }),
     chip: (cat) => { const c=CAT_COLORS[cat]||CAT_COLORS.default; return { display:"inline-flex",alignItems:"center",gap:"5px",background:c.bg,color:c.text,borderRadius:"20px",padding:"3px 9px",fontSize:"11px",fontWeight:"bold" }; },
-    input: { width:"100%", padding:"8px 12px", borderRadius:"7px", border:"1.5px solid #d4ccbf", fontSize:"13px", fontFamily:"Georgia,serif", background:"#fafaf7", outline:"none", boxSizing:"border-box" },
+    input: { width:"100%", padding:"8px 12px", borderRadius:"7px", border:"1.5px solid #d4ccbf", fontSize:"13px", fontFamily:"'Inter',sans-serif", background:"#fafaf7", outline:"none", boxSizing:"border-box" },
     label: { display:"block", fontSize:"11px", fontWeight:"bold", color:"#5a5248", marginBottom:"3px", letterSpacing:"0.5px", textTransform:"uppercase" },
-    toast_: (t) => ({ position:"fixed", bottom:"22px", left:"50%", transform:"translateX(-50%)", background:t==="warn"?"#b25c00":"#1e3a10", color:"#fff", borderRadius:"8px", padding:"10px 20px", zIndex:9999, fontFamily:"Georgia,serif", fontSize:"13px", boxShadow:"0 4px 18px rgba(0,0,0,.2)", animation:"fadeUp .2s" }),
+    toast_: (t) => ({ position:"fixed", bottom:"22px", left:"50%", transform:"translateX(-50%)", background:t==="warn"?"#b25c00":"#1e3a10", color:"#fff", borderRadius:"8px", padding:"10px 20px", zIndex:9999, fontFamily:"'Inter',sans-serif", fontSize:"13px", boxShadow:"0 4px 18px rgba(0,0,0,.2)", animation:"fadeUp .2s" }),
   };
 
   // ── PRINT STYLES ──────────────────────────────────────────
@@ -249,7 +249,7 @@ export default function App() {
     win.document.write(`
       <html><head><title>Schichtplan Kaffibohne – Rebblüete Fest</title>
       <style>
-        body { font-family: Georgia, serif; padding: 24px; color: #1e1a14; }
+        body { font-family: 'Playfair Display', Georgia, serif; padding: 24px; color: #1e1a14; }
         h1 { font-size: 22px; color: #1e3a10; margin-bottom: 4px; }
         h2 { font-size: 14px; color: #5a5248; font-weight: normal; margin-bottom: 20px; }
         table { width: 100%; border-collapse: collapse; }
@@ -280,16 +280,24 @@ export default function App() {
   return (
     <div style={S.wrap}>
       <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
         @keyframes fadeUp { from{opacity:0;transform:translateX(-50%) translateY(10px)} to{opacity:1;transform:translateX(-50%) translateY(0)} }
+        @keyframes sway { 0%,100%{transform:rotate(-2deg)} 50%{transform:rotate(2deg)} }
         ::-webkit-scrollbar{display:none} button:hover{opacity:.85} *{box-sizing:border-box}
-        input,textarea,select{font-family:Georgia,serif} textarea{resize:vertical}
+        input,textarea,select{font-family:'Inter',sans-serif} textarea{resize:vertical}
         @media print { .no-print{display:none!important} }
+        .serif { font-family:'Playfair Display',Georgia,serif; }
       `}</style>
 
       {/* HEADER */}
       <div style={S.header} className="no-print">
         <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start" }}>
-          <div><div style={S.logo}>Elternverein Weiningen</div><div style={S.h1}>Gemeinschaftsplattform</div></div>
+          <div style={{ display:"flex", alignItems:"center", gap:"10px" }}>
+            <div style={{ background:"#f0ead8", borderRadius:"10px", padding:"4px", width:"40px", height:"40px", display:"flex", alignItems:"center", justifyContent:"center" }}>
+              <img src="/images/logo.png" alt="Logo" style={{ width:"100%", height:"100%", objectFit:"contain" }} />
+            </div>
+            <div><div style={S.logo}>Elternverein Weiningen</div><div style={S.h1}>Gemeinschaftsplattform</div></div>
+          </div>
           <div style={{ fontSize:"10px", color:"#7ec85a", paddingTop:"2px" }}>Prototyp</div>
         </div>
         <div style={S.nav}>
@@ -319,27 +327,47 @@ export default function App() {
         {/* ══ REBBLÜETE FEST / SCHICHTPLAN ══════════════════ */}
         {tab==="rebblüete" && <>
           {/* Hero */}
-          <div style={{ background:"linear-gradient(135deg,#1e3a10,#2d5a1e)", borderRadius:"14px", padding:"20px 20px 16px", marginBottom:"14px", color:"#f0ead8" }}>
-            <div style={{ fontSize:"11px", letterSpacing:"3px", textTransform:"uppercase", color:"#7ec85a", marginBottom:"4px" }}>Weiningen · 2026</div>
-            <div style={{ fontSize:"24px", marginBottom:"4px" }}>🍇 Rebblüete Fest</div>
-            <div style={{ fontSize:"13px", color:"#a8c88a" }}>Café Kaffibohne · Helfer-Einteilung · 10:00 – 00:00 Uhr</div>
-            <div style={{ display:"flex", gap:"10px", marginTop:"14px", flexWrap:"wrap" }}>
-              <div style={{ background:"rgba(255,255,255,.08)", borderRadius:"8px", padding:"8px 14px", textAlign:"center" }}>
-                <div style={{ fontSize:"20px", fontWeight:"bold" }}>{SHIFTS.length}</div>
-                <div style={{ fontSize:"10px", color:"#a8c88a" }}>Schichten</div>
+          <div style={{ position:"relative", overflow:"hidden", background:"linear-gradient(135deg,#1e3a10,#2d5a1e 60%,#3a6e26)", borderRadius:"16px", padding:"24px 22px 18px", marginBottom:"16px", color:"#f0ead8", boxShadow:"0 8px 28px rgba(30,58,16,.25)" }}>
+            {/* decorative grape cluster illustration */}
+            <svg viewBox="0 0 140 160" style={{ position:"absolute", top:"-14px", right:"-10px", width:"130px", height:"150px", opacity:0.9, transformOrigin:"top center", animation:"sway 6s ease-in-out infinite" }}>
+              <path d="M70 8 Q66 28 70 44" stroke="#5a8a3a" strokeWidth="3" fill="none" strokeLinecap="round"/>
+              <path d="M70 20 Q90 14 96 0" stroke="#5a8a3a" strokeWidth="2.5" fill="none" strokeLinecap="round"/>
+              <ellipse cx="98" cy="-2" rx="14" ry="10" fill="#6fae44" opacity="0.85" transform="rotate(20 98 -2)"/>
+              {[
+                [55,46],[70,46],[85,46],
+                [48,60],[63,60],[78,60],[93,60],
+                [55,74],[70,74],[85,74],
+                [48,88],[63,88],[78,88],[93,88],
+                [55,102],[70,102],[85,102],
+                [63,114],[78,114],
+                [70,126],
+              ].map(([cx,cy],i) => (
+                <circle key={i} cx={cx} cy={cy} r="9.5" fill={i%3===0 ? "#7ec85a" : i%3===1 ? "#9c6fd8" : "#7a4fc0"} opacity={0.92} />
+              ))}
+            </svg>
+            <div style={{ position:"relative", zIndex:1 }}>
+              <div style={{ fontSize:"11px", letterSpacing:"3px", textTransform:"uppercase", color:"#9ed87a", marginBottom:"5px", fontWeight:600 }}>Weiningen · 2026</div>
+              <div className="serif" style={{ fontSize:"27px", fontWeight:700, marginBottom:"5px", maxWidth:"75%" }}>🍇 Rebblüete Fest</div>
+              <div style={{ fontSize:"13px", color:"#bcdca0" }}>Café Kaffibohne · Helfer-Einteilung · 10:00 – 00:00 Uhr</div>
+            </div>
+            <div style={{ display:"flex", gap:"10px", marginTop:"16px", flexWrap:"wrap", position:"relative", zIndex:1 }}>
+              <div style={{ background:"rgba(255,255,255,.10)", borderRadius:"9px", padding:"8px 14px", textAlign:"center", backdropFilter:"blur(2px)" }}>
+                <div className="serif" style={{ fontSize:"21px", fontWeight:700 }}>{SHIFTS.length}</div>
+                <div style={{ fontSize:"10px", color:"#bcdca0" }}>Schichten</div>
               </div>
-              <div style={{ background:"rgba(255,255,255,.08)", borderRadius:"8px", padding:"8px 14px", textAlign:"center" }}>
-                <div style={{ fontSize:"20px", fontWeight:"bold" }}>{ROLES.length}</div>
-                <div style={{ fontSize:"10px", color:"#a8c88a" }}>Aufgaben</div>
+              <div style={{ background:"rgba(255,255,255,.10)", borderRadius:"9px", padding:"8px 14px", textAlign:"center", backdropFilter:"blur(2px)" }}>
+                <div className="serif" style={{ fontSize:"21px", fontWeight:700 }}>{ROLES.length}</div>
+                <div style={{ fontSize:"10px", color:"#bcdca0" }}>Aufgaben</div>
               </div>
-              <div style={{ background:"rgba(255,255,255,.08)", borderRadius:"8px", padding:"8px 14px", textAlign:"center" }}>
-                <div style={{ fontSize:"20px", fontWeight:"bold" }}>{SHIFTS.length * totalSlots}</div>
-                <div style={{ fontSize:"10px", color:"#a8c88a" }}>Plätze total</div>
+              <div style={{ background:"rgba(255,255,255,.10)", borderRadius:"9px", padding:"8px 14px", textAlign:"center", backdropFilter:"blur(2px)" }}>
+                <div className="serif" style={{ fontSize:"21px", fontWeight:700 }}>{SHIFTS.length * totalSlots}</div>
+                <div style={{ fontSize:"10px", color:"#bcdca0" }}>Plätze total</div>
               </div>
-              <div style={{ background:"rgba(255,255,255,.08)", borderRadius:"8px", padding:"8px 14px", textAlign:"center" }}>
-                <div style={{ fontSize:"20px", fontWeight:"bold", color:"#7ec85a" }}>{SHIFTS.reduce((n,s)=>n+totalInShift(s.id),0)}</div>
-                <div style={{ fontSize:"10px", color:"#a8c88a" }}>Belegt</div>
+              <div style={{ background:"rgba(255,255,255,.10)", borderRadius:"9px", padding:"8px 14px", textAlign:"center", backdropFilter:"blur(2px)" }}>
+                <div className="serif" style={{ fontSize:"21px", fontWeight:700, color:"#9ed87a" }}>{SHIFTS.reduce((n,s)=>n+totalInShift(s.id),0)}</div>
+                <div style={{ fontSize:"10px", color:"#bcdca0" }}>Belegt</div>
               </div>
+
             </div>
           </div>
 
@@ -407,7 +435,7 @@ export default function App() {
                           ))}
                         </div>
                         <button
-                          style={{ padding:"5px 0", borderRadius:"6px", border:"none", cursor: canJoin?"pointer":"default", background: isMe?"#1e3a10":full||alreadyOtherRole?"#e6e0d4":"#c8e8b0", color: isMe?"#7ec85a":full||alreadyOtherRole?"#9c8f83":"#1e3a10", fontFamily:"Georgia,serif", fontSize:"11px", fontWeight:"bold", width:"100%" }}
+                          style={{ padding:"5px 0", borderRadius:"6px", border:"none", cursor: canJoin?"pointer":"default", background: isMe?"#1e3a10":full||alreadyOtherRole?"#e6e0d4":"#c8e8b0", color: isMe?"#7ec85a":full||alreadyOtherRole?"#9c8f83":"#1e3a10", fontFamily:"'Inter',sans-serif", fontSize:"11px", fontWeight:"bold", width:"100%" }}
                           onClick={() => toggleSchicht(sh.id, r.id)}>
                           {isMe ? "✓ Abmelden" : full ? "Voll" : alreadyOtherRole ? "Schon dabei" : "+ Eintragen"}
                         </button>
@@ -458,29 +486,35 @@ export default function App() {
 
         {/* ══ KALENDER ══════════════════════════════════════ */}
         {tab==="kalender" && <>
+          <div style={{ position:"relative", borderRadius:"14px", overflow:"hidden", marginBottom:"16px", height:"130px" }}>
+            <img src="/images/kids-grass.jpg" alt="" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center 30%" }} />
+            <div style={{ position:"absolute", inset:0, background:"linear-gradient(0deg,rgba(30,58,16,.7),rgba(30,58,16,0))", display:"flex", alignItems:"flex-end", padding:"14px" }}>
+              <div className="serif" style={{ color:"#f0ead8", fontSize:"18px", fontWeight:600 }}>Unsere Veranstaltungen</div>
+            </div>
+          </div>
           <div style={{ display:"flex", gap:"6px", flexWrap:"wrap", marginBottom:"16px" }}>
-            {cats.map(cat => <button key={cat} onClick={()=>setFilterCat(cat)} style={{ padding:"4px 13px", borderRadius:"20px", border:"1.5px solid #c8c0b0", cursor:"pointer", fontSize:"12px", fontFamily:"Georgia,serif", background:filterCat===cat?"#1e3a10":"#fff", color:filterCat===cat?"#f0ead8":"#1e1a14", fontWeight:filterCat===cat?"bold":"normal" }}>{cat}</button>)}
+            {cats.map(cat => <button key={cat} onClick={()=>setFilterCat(cat)} style={{ padding:"4px 13px", borderRadius:"20px", border:"1.5px solid #c8c0b0", cursor:"pointer", fontSize:"12px", fontFamily:"'Inter',sans-serif", background:filterCat===cat?"#1e3a10":"#fff", color:filterCat===cat?"#f0ead8":"#1e1a14", fontWeight:filterCat===cat?"bold":"normal" }}>{cat}</button>)}
           </div>
           {filtEvents.map(ev => {
             const isAtt = ev.attendees.includes(userName);
             const days = daysUntil(ev.date);
             const cc = CAT_COLORS[ev.category]||CAT_COLORS.default;
             return (
-              <div key={ev.id} style={S.card}>
+              <div key={ev.id} style={{ ...S.card, borderLeft: `5px solid ${ev.color}` }}>
                 <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", gap:"10px", flexWrap:"wrap" }}>
                   <div style={{ flex:1, minWidth:"180px" }}>
                     <div style={{ display:"flex", gap:"6px", marginBottom:"5px", flexWrap:"wrap", alignItems:"center" }}>
-                      <span style={S.chip(ev.category)}><span style={{ width:"6px", height:"6px", borderRadius:"50%", background:cc.dot, display:"inline-block" }}/>{ev.category}</span>
+                      <span style={{ ...S.chip(ev.category), background: ev.color, color: "#1e1a14" }}><span style={{ width:"6px", height:"6px", borderRadius:"50%", background: "#1e1a14", display:"inline-block" }}/>{ev.category}</span>
                       {days>=0&&days<=60&&<span style={{ fontSize:"10px", color:"#b25c00", fontWeight:"bold", background:"#fff3e0", padding:"2px 7px", borderRadius:"20px" }}>in {days} Tagen</span>}
                     </div>
-                    <div style={{ fontSize:"17px", marginBottom:"3px" }}>{ev.title}</div>
+                    <div className="serif" style={{ fontSize:"18px", fontWeight:600, marginBottom:"3px", color: ev.color }}>{ev.title}</div>
                     <div style={{ fontSize:"11px", color:"#7a6e60" }}>{fmt(ev.date)} · {ev.time} · {ev.location}</div>
                     <div style={{ fontSize:"12px", color:"#5a5248", marginTop:"7px" }}>{ev.description}</div>
                     {ev.attendees.length>0&&<div style={{ fontSize:"10px", color:"#9c8f83", marginTop:"5px" }}>👥 {ev.attendees.join(", ")}</div>}
                     {ev.tasks.length>0&&<button style={{ ...S.btn("outline"), marginTop:"8px", fontSize:"11px", padding:"4px 10px" }} onClick={()=>setTab("helfer")}>🙋 Helfer gesucht →</button>}
                   </div>
                   <div style={{ display:"flex", flexDirection:"column", alignItems:"flex-end", gap:"4px" }}>
-                    <button style={S.btn(isAtt?"danger":"primary")} onClick={()=>toggleAttend(ev.id)}>{isAtt?"✓ Dabei":"Ich komme"}</button>
+                    <button style={{ ...S.btn(isAtt?"danger":"primary"), background: isAtt ? "#b0003a" : ev.color, color: isAtt ? "#fff" : "#1e1a14" }} onClick={()=>toggleAttend(ev.id)}>{isAtt?"✓ Dabei":"Ich komme"}</button>
                     <span style={{ fontSize:"10px", color:"#9c8f83" }}>{ev.attendees.length} Zusagen</span>
                   </div>
                 </div>
@@ -512,7 +546,7 @@ export default function App() {
                       </div>
                       {t.helpers.length>0&&<div style={{ fontSize:"10px", color:"#9c8f83", marginTop:"2px" }}>{t.helpers.join(", ")}</div>}
                     </div>
-                    <button style={{ padding:"5px 12px", borderRadius:"6px", border:"none", cursor:full?"default":"pointer", background:isMe?"#1e3a10":full?"#e6e0d4":"#e8f5e0", color:isMe?"#fff":full?"#9c8f83":"#1e3a10", fontFamily:"Georgia,serif", fontSize:"11px", fontWeight:"bold" }} onClick={()=>!full&&toggleHelper(ev.id,t.id)}>
+                    <button style={{ padding:"5px 12px", borderRadius:"6px", border:"none", cursor:full?"default":"pointer", background:isMe?"#1e3a10":full?"#e6e0d4":"#e8f5e0", color:isMe?"#fff":full?"#9c8f83":"#1e3a10", fontFamily:"'Inter',sans-serif", fontSize:"11px", fontWeight:"bold" }} onClick={()=>!full&&toggleHelper(ev.id,t.id)}>
                       {isMe?"✓ Dabei":full?"Voll":"+ Helfen"}
                     </button>
                   </div>
@@ -525,31 +559,34 @@ export default function App() {
         {/* ══ SPIELGRUPPEN ══════════════════════════════════ */}
         {tab==="spielgruppen" && <>
           <p style={{ fontSize:"13px", color:"#5a5248", marginBottom:"16px" }}>Platz direkt reservieren — Bestätigung per E-Mail.</p>
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(220px,1fr))", gap:"12px" }}>
           {data.spielgruppen.map(sg => {
             const isIn = sg.enrolled.includes(userName);
             const full = sg.enrolled.length>=sg.slots;
             const pct = (sg.enrolled.length/sg.slots)*100;
             return (
-              <div key={sg.id} style={S.card}>
-                <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", gap:"10px", flexWrap:"wrap" }}>
-                  <div style={{ flex:1 }}>
-                    <div style={{ fontSize:"16px", marginBottom:"3px" }}>{sg.name}</div>
-                    <div style={{ fontSize:"11px", color:"#7a6e60", marginBottom:"6px" }}>🎂 {sg.age} · 📅 {sg.day} · ⏰ {sg.time}</div>
-                    <div style={{ fontSize:"12px", color:"#5a5248", marginBottom:"8px" }}>{sg.description}</div>
-                    <div style={{ display:"flex", alignItems:"center", gap:"7px" }}>
-                      <div style={{ width:"100px", height:"4px", background:"#e6e0d4", borderRadius:"4px" }}>
-                        <div style={{ width:`${pct}%`, height:"100%", background:pct>=100?"#b0003a":pct>70?"#f09030":"#5aad48", borderRadius:"4px" }} />
-                      </div>
-                      <span style={{ fontSize:"11px", color:"#9c8f83" }}>{sg.enrolled.length}/{sg.slots} belegt</span>
+              <div key={sg.id} style={{ ...S.card, padding:0, overflow:"hidden", display:"flex", flexDirection:"column", borderTop:`5px solid ${sg.color}` }}>
+                <div style={{ height:"110px", overflow:"hidden" }}>
+                  <img src={sg.img} alt={sg.name} style={{ width:"100%", height:"100%", objectFit:"cover" }} />
+                </div>
+                <div style={{ padding:"14px" }}>
+                  <div className="serif" style={{ fontSize:"16px", fontWeight:600, marginBottom:"3px", color: sg.color }}>{sg.name}</div>
+                  <div style={{ fontSize:"11px", color:"#7a6e60", marginBottom:"6px" }}>🎂 {sg.age}<br/>📅 {sg.day} · ⏰ {sg.time}</div>
+                  <div style={{ fontSize:"12px", color:"#5a5248", marginBottom:"8px" }}>{sg.description}</div>
+                  <div style={{ display:"flex", alignItems:"center", gap:"6px", marginBottom:"10px" }}>
+                    <div style={{ flex:1, height:"4px", background:"#e6e0d4", borderRadius:"4px" }}>
+                      <div style={{ width:`${pct}%`, height:"100%", background:pct>=100?sg.color:sg.color, borderRadius:"4px" }} />
                     </div>
+                    <span style={{ fontSize:"10px", color:"#9c8f83", whiteSpace:"nowrap" }}>{sg.enrolled.length}/{sg.slots}</span>
                   </div>
-                  <button style={S.btn(isIn?"danger":full?"secondary":"primary")} onClick={()=>toggleEnroll(sg.id)}>
+                  <button style={{ ...S.btn(), width:"100%", background: isIn ? "#1e3a10" : full ? sg.color : sg.color, color: isIn ? "#f0ead8" : "#1e1a14" }} onClick={()=>toggleEnroll(sg.id)}>
                     {isIn?"✓ Angemeldet":full?"Warteliste":"Anmelden"}
                   </button>
                 </div>
               </div>
             );
           })}
+          </div>
         </>}
 
         {/* ══ BABYSITTER ════════════════════════════════════ */}
@@ -653,9 +690,15 @@ export default function App() {
               <div style={{ fontSize:"13px", color:"#5a5248" }}>Bestätigung folgt per E-Mail.</div>
               <button style={{ ...S.btn("outline"), marginTop:"16px" }} onClick={()=>setMemberSent(false)}>Weitere Anmeldung</button>
             </div>
-          ) : (
+          ) : (<>
+            <div style={{ position:"relative", borderRadius:"14px", overflow:"hidden", marginBottom:"14px", height:"160px" }}>
+              <img src="/images/hero-hands.jpg" alt="" style={{ width:"100%", height:"100%", objectFit:"cover" }} />
+              <div style={{ position:"absolute", inset:0, background:"linear-gradient(0deg,rgba(30,58,16,.75),rgba(30,58,16,.15))", display:"flex", alignItems:"flex-end", padding:"16px" }}>
+                <div className="serif" style={{ color:"#f0ead8", fontSize:"20px", fontWeight:600 }}>Werde Teil unserer Gemeinschaft</div>
+              </div>
+            </div>
             <div style={S.card}>
-              <div style={{ fontSize:"17px", marginBottom:"3px" }}>Mitglied werden</div>
+              <div className="serif" style={{ fontSize:"19px", fontWeight:600, marginBottom:"3px" }}>Mitglied werden</div>
               <div style={{ fontSize:"12px", color:"#5a5248", marginBottom:"18px" }}>Jahresbeitrag: CHF 30.– pro Familie</div>
               <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"10px", marginBottom:"10px" }}>
                 {[["Vorname *","vorname"],["Nachname *","nachname"]].map(([l,k])=>(
@@ -671,7 +714,7 @@ export default function App() {
               <div style={{ marginBottom:"18px" }}><label style={S.label}>Bemerkungen</label><textarea value={memberForm.bemerkung} onChange={e=>setMemberForm({...memberForm,bemerkung:e.target.value})} rows={2} style={S.input}/></div>
               <button style={S.btn()} onClick={submitMember}>Anmeldung einreichen</button>
             </div>
-          )
+          </>)
         )}
 
       </div>
